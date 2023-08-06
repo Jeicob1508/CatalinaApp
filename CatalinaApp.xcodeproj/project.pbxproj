@@ -16,6 +16,9 @@
 		0A3C08AC2A7DCC5300E64B14 /* CatalinaAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08AB2A7DCC5300E64B14 /* CatalinaAppTests.swift */; };
 		0A3C08B62A7DCC5400E64B14 /* CatalinaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */; };
 		0A3C08B82A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */; };
+		0A3C08C62A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */; };
+		0A3C08C72A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */; };
+		0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,9 @@
 		0A3C08B12A7DCC5400E64B14 /* CatalinaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatalinaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITests.swift; sourceTree = "<group>"; };
 		0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarInformacion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,8 +104,9 @@
 		0A3C08942A7DCC5100E64B14 /* CatalinaApp */ = {
 			isa = PBXGroup;
 			children = (
+				0A3C08CC2A7DD30D00E64B14 /* Vistas */,
+				0A3C08C92A7DCE7A00E64B14 /* DB */,
 				0A3C08952A7DCC5100E64B14 /* CatalinaAppApp.swift */,
-				0A3C08972A7DCC5100E64B14 /* ContentView.swift */,
 				0A3C08992A7DCC5300E64B14 /* Assets.xcassets */,
 				0A3C089E2A7DCC5300E64B14 /* Persistence.swift */,
 				0A3C08A02A7DCC5300E64B14 /* CatalinaApp.xcdatamodeld */,
@@ -131,6 +138,24 @@
 				0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */,
 			);
 			path = CatalinaAppUITests;
+			sourceTree = "<group>";
+		};
+		0A3C08C92A7DCE7A00E64B14 /* DB */ = {
+			isa = PBXGroup;
+			children = (
+				0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */,
+				0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */,
+			);
+			path = DB;
+			sourceTree = "<group>";
+		};
+		0A3C08CC2A7DD30D00E64B14 /* Vistas */ = {
+			isa = PBXGroup;
+			children = (
+				0A3C08972A7DCC5100E64B14 /* ContentView.swift */,
+				0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */,
+			);
+			path = Vistas;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -265,7 +290,10 @@
 			files = (
 				0A3C089F2A7DCC5300E64B14 /* Persistence.swift in Sources */,
 				0A3C08982A7DCC5100E64B14 /* ContentView.swift in Sources */,
+				0A3C08C72A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift in Sources */,
+				0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */,
 				0A3C08A22A7DCC5300E64B14 /* CatalinaApp.xcdatamodeld in Sources */,
+				0A3C08C62A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift in Sources */,
 				0A3C08962A7DCC5100E64B14 /* CatalinaAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
