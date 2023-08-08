@@ -7,8 +7,21 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A113C0B2A82B2DC001FD53E /* TabBarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C0A2A82B2DC001FD53E /* TabBarButton.swift */; };
+		0A113C0E2A82B2FD001FD53E /* CustomTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C0D2A82B2FD001FD53E /* CustomTabBar.swift */; };
+		0A113C102A82B5B6001FD53E /* ConfiguracionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C0F2A82B5B6001FD53E /* ConfiguracionView.swift */; };
+		0A113C142A82C151001FD53E /* ConfigNombre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C132A82C151001FD53E /* ConfigNombre.swift */; };
+		0A113C162A82DCB3001FD53E /* Hitorico2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C152A82DCB3001FD53E /* Hitorico2.swift */; };
+		0A113C182A82DEC8001FD53E /* Filtro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C172A82DEC8001FD53E /* Filtro.swift */; };
+		0A113C1A2A82EEA2001FD53E /* VerMasVista.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C192A82EEA2001FD53E /* VerMasVista.swift */; };
+		0A113C1C2A849F0F001FD53E /* ConfigBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C1B2A849F0F001FD53E /* ConfigBudget.swift */; };
+		0A113C312A857E9F001FD53E /* Budget+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C2D2A857E9F001FD53E /* Budget+CoreDataClass.swift */; };
+		0A113C322A857E9F001FD53E /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C2E2A857E9F001FD53E /* Budget+CoreDataProperties.swift */; };
+		0A113C332A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C2F2A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift */; };
+		0A113C342A857E9F001FD53E /* CatalinaDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C302A857E9F001FD53E /* CatalinaDB+CoreDataProperties.swift */; };
+		0A113C362A85A901001FD53E /* VerMasVista2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C352A85A901001FD53E /* VerMasVista2.swift */; };
 		0A3C08962A7DCC5100E64B14 /* CatalinaAppApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08952A7DCC5100E64B14 /* CatalinaAppApp.swift */; };
-		0A3C08982A7DCC5100E64B14 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08972A7DCC5100E64B14 /* ContentView.swift */; };
+		0A3C08982A7DCC5100E64B14 /* HistoricoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08972A7DCC5100E64B14 /* HistoricoView.swift */; };
 		0A3C089A2A7DCC5300E64B14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C08992A7DCC5300E64B14 /* Assets.xcassets */; };
 		0A3C089D2A7DCC5300E64B14 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A3C089C2A7DCC5300E64B14 /* Preview Assets.xcassets */; };
 		0A3C089F2A7DCC5300E64B14 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C089E2A7DCC5300E64B14 /* Persistence.swift */; };
@@ -16,9 +29,9 @@
 		0A3C08AC2A7DCC5300E64B14 /* CatalinaAppTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08AB2A7DCC5300E64B14 /* CatalinaAppTests.swift */; };
 		0A3C08B62A7DCC5400E64B14 /* CatalinaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */; };
 		0A3C08B82A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */; };
-		0A3C08C62A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */; };
-		0A3C08C72A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */; };
 		0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */; };
+		0AA6494C2A80BA7E00557E11 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6494B2A80BA7E00557E11 /* RootView.swift */; };
+		0ADE66002AC6439D00785382 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0ADE65FF2AC6439D00785382 /* Launch Screen.storyboard */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -39,9 +52,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0A113C0A2A82B2DC001FD53E /* TabBarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarButton.swift; sourceTree = "<group>"; };
+		0A113C0D2A82B2FD001FD53E /* CustomTabBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabBar.swift; sourceTree = "<group>"; };
+		0A113C0F2A82B5B6001FD53E /* ConfiguracionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfiguracionView.swift; sourceTree = "<group>"; };
+		0A113C132A82C151001FD53E /* ConfigNombre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigNombre.swift; sourceTree = "<group>"; };
+		0A113C152A82DCB3001FD53E /* Hitorico2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hitorico2.swift; sourceTree = "<group>"; };
+		0A113C172A82DEC8001FD53E /* Filtro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtro.swift; sourceTree = "<group>"; };
+		0A113C192A82EEA2001FD53E /* VerMasVista.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerMasVista.swift; sourceTree = "<group>"; };
+		0A113C1B2A849F0F001FD53E /* ConfigBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigBudget.swift; sourceTree = "<group>"; };
+		0A113C2D2A857E9F001FD53E /* Budget+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		0A113C2E2A857E9F001FD53E /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		0A113C2F2A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		0A113C302A857E9F001FD53E /* CatalinaDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		0A113C352A85A901001FD53E /* VerMasVista2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerMasVista2.swift; sourceTree = "<group>"; };
 		0A3C08922A7DCC5100E64B14 /* CatalinaApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CatalinaApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3C08952A7DCC5100E64B14 /* CatalinaAppApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppApp.swift; sourceTree = "<group>"; };
-		0A3C08972A7DCC5100E64B14 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		0A3C08972A7DCC5100E64B14 /* HistoricoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricoView.swift; sourceTree = "<group>"; };
 		0A3C08992A7DCC5300E64B14 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A3C089C2A7DCC5300E64B14 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		0A3C089E2A7DCC5300E64B14 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
@@ -51,9 +77,9 @@
 		0A3C08B12A7DCC5400E64B14 /* CatalinaAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CatalinaAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITests.swift; sourceTree = "<group>"; };
 		0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataClass.swift"; sourceTree = "<group>"; };
-		0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CatalinaDB+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarInformacion.swift; sourceTree = "<group>"; };
+		0AA6494B2A80BA7E00557E11 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		0ADE65FF2AC6439D00785382 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +107,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A113C092A82B2BC001FD53E /* CustomTabBar */ = {
+			isa = PBXGroup;
+			children = (
+				0A113C0A2A82B2DC001FD53E /* TabBarButton.swift */,
+				0A113C0D2A82B2FD001FD53E /* CustomTabBar.swift */,
+			);
+			path = CustomTabBar;
+			sourceTree = "<group>";
+		};
+		0A113C112A82C13B001FD53E /* VistasConfiguraciones */ = {
+			isa = PBXGroup;
+			children = (
+				0A113C0F2A82B5B6001FD53E /* ConfiguracionView.swift */,
+				0A113C132A82C151001FD53E /* ConfigNombre.swift */,
+				0A113C1B2A849F0F001FD53E /* ConfigBudget.swift */,
+			);
+			path = VistasConfiguraciones;
+			sourceTree = "<group>";
+		};
 		0A3C08892A7DCC5100E64B14 = {
 			isa = PBXGroup;
 			children = (
@@ -104,6 +149,10 @@
 		0A3C08942A7DCC5100E64B14 /* CatalinaApp */ = {
 			isa = PBXGroup;
 			children = (
+				0ADE65FF2AC6439D00785382 /* Launch Screen.storyboard */,
+				0AA6494B2A80BA7E00557E11 /* RootView.swift */,
+				0A113C112A82C13B001FD53E /* VistasConfiguraciones */,
+				0A113C092A82B2BC001FD53E /* CustomTabBar */,
 				0A3C08CC2A7DD30D00E64B14 /* Vistas */,
 				0A3C08C92A7DCE7A00E64B14 /* DB */,
 				0A3C08952A7DCC5100E64B14 /* CatalinaAppApp.swift */,
@@ -143,8 +192,10 @@
 		0A3C08C92A7DCE7A00E64B14 /* DB */ = {
 			isa = PBXGroup;
 			children = (
-				0A3C08C42A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift */,
-				0A3C08C52A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift */,
+				0A113C2D2A857E9F001FD53E /* Budget+CoreDataClass.swift */,
+				0A113C2E2A857E9F001FD53E /* Budget+CoreDataProperties.swift */,
+				0A113C2F2A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift */,
+				0A113C302A857E9F001FD53E /* CatalinaDB+CoreDataProperties.swift */,
 			);
 			path = DB;
 			sourceTree = "<group>";
@@ -152,8 +203,12 @@
 		0A3C08CC2A7DD30D00E64B14 /* Vistas */ = {
 			isa = PBXGroup;
 			children = (
-				0A3C08972A7DCC5100E64B14 /* ContentView.swift */,
+				0A3C08972A7DCC5100E64B14 /* HistoricoView.swift */,
 				0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */,
+				0A113C152A82DCB3001FD53E /* Hitorico2.swift */,
+				0A113C172A82DEC8001FD53E /* Filtro.swift */,
+				0A113C192A82EEA2001FD53E /* VerMasVista.swift */,
+				0A113C352A85A901001FD53E /* VerMasVista2.swift */,
 			);
 			path = Vistas;
 			sourceTree = "<group>";
@@ -222,7 +277,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1430;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					0A3C08912A7DCC5100E64B14 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -262,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0ADE66002AC6439D00785382 /* Launch Screen.storyboard in Resources */,
 				0A3C089D2A7DCC5300E64B14 /* Preview Assets.xcassets in Resources */,
 				0A3C089A2A7DCC5300E64B14 /* Assets.xcassets in Resources */,
 			);
@@ -288,12 +344,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A113C322A857E9F001FD53E /* Budget+CoreDataProperties.swift in Sources */,
+				0AA6494C2A80BA7E00557E11 /* RootView.swift in Sources */,
+				0A113C342A857E9F001FD53E /* CatalinaDB+CoreDataProperties.swift in Sources */,
+				0A113C362A85A901001FD53E /* VerMasVista2.swift in Sources */,
+				0A113C162A82DCB3001FD53E /* Hitorico2.swift in Sources */,
 				0A3C089F2A7DCC5300E64B14 /* Persistence.swift in Sources */,
-				0A3C08982A7DCC5100E64B14 /* ContentView.swift in Sources */,
-				0A3C08C72A7DCE6100E64B14 /* CatalinaDB+CoreDataProperties.swift in Sources */,
+				0A113C182A82DEC8001FD53E /* Filtro.swift in Sources */,
+				0A113C102A82B5B6001FD53E /* ConfiguracionView.swift in Sources */,
+				0A3C08982A7DCC5100E64B14 /* HistoricoView.swift in Sources */,
 				0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */,
+				0A113C1A2A82EEA2001FD53E /* VerMasVista.swift in Sources */,
+				0A113C142A82C151001FD53E /* ConfigNombre.swift in Sources */,
+				0A113C0B2A82B2DC001FD53E /* TabBarButton.swift in Sources */,
+				0A113C0E2A82B2FD001FD53E /* CustomTabBar.swift in Sources */,
 				0A3C08A22A7DCC5300E64B14 /* CatalinaApp.xcdatamodeld in Sources */,
-				0A3C08C62A7DCE6100E64B14 /* CatalinaDB+CoreDataClass.swift in Sources */,
+				0A113C1C2A849F0F001FD53E /* ConfigBudget.swift in Sources */,
+				0A113C332A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift in Sources */,
+				0A113C312A857E9F001FD53E /* Budget+CoreDataClass.swift in Sources */,
 				0A3C08962A7DCC5100E64B14 /* CatalinaAppApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -367,6 +435,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -427,6 +496,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -459,6 +529,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -488,6 +559,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (

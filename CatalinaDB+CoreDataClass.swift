@@ -2,7 +2,7 @@
 //  CatalinaDB+CoreDataClass.swift
 //  CatalinaApp
 //
-//  Created by Jacobo Osorio on 4/08/23.
+//  Created by Jacobo Osorio on 10/08/23.
 //
 //
 
