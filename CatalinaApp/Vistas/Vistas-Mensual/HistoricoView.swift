@@ -38,7 +38,7 @@ struct HistoricoView: View {
         VStack{
             Text("Resumen Mensual")
                 .font(.headline)
-
+            
             List{
                 ForEach(budget, id: \.id) { budget in
                     VStack(alignment: .leading){
@@ -77,47 +77,6 @@ struct HistoricoView: View {
                 }
             }
             .background(.blue)
-            
-            Rectangle()
-                .frame(height: 7)
-                .foregroundColor(.black)
-                .edgesIgnoringSafeArea(.horizontal)
-            
-            Text("Resumen Diario")
-                .font(.headline)
-            List{
-                ForEach(catalinaDB, id: \.id) { catalinaDB in
-                    VStack(alignment: .leading){
-                        HStack{
-                            Text("Tratamiento: ")
-                            Text(String(format: "%.3f", catalinaDB.tratamiento))
-                                .foregroundColor(.primary)
-                        }
-                        Text("\(catalinaDB.fecha ?? self.fecha, formatter: Self.fechaFormato)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.bottom, 0.2)
-                        HStack{
-                            Button(action: {
-                                // Accion de Like
-                            }) {
-                                Image(systemName: "hand.thumbsup") 
-                                    .foregroundColor(.blue)
-                            }
-                            Spacer()
-                            Button(action:{
-                                if let fecha = catalinaDB.fecha {
-                                    globalState.verMasVista.toggle()
-                                    globalState.fechaInfo = fecha
-                                }
-                            }){
-                                Text("Ver más")
-                            }
-                            Spacer()
-                        }
-                    }
-                }
-            }
         }
     }
     

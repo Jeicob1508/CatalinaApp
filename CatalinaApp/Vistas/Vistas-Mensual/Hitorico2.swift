@@ -33,14 +33,6 @@ struct HistoricoEx: View {
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
                     .edgesIgnoringSafeArea(.all)
-                /*
-                Button(action:{
-                    globalState.filtroview.toggle()
-                }){
-                    Text("Filtro")
-                }
-                .frame(height: 25)
-                */
             }
             if globalState.filtroview{
                 Filtro()
