@@ -9,7 +9,8 @@ import SwiftUI
 
 enum Tabs: Int{
     case historico = 0
-    case config = 1
+    case historico1 = 1
+    case config = 2
 }
 
 struct CustomTabBar: View {
@@ -27,36 +28,20 @@ struct CustomTabBar: View {
                 selectedTab = .historico
                 globalState.verMasVista = false
                 globalState.filtroview = false
-                //
             } label: {
-                //
-                TabBarButton(buttonText: "Historico", imageName: "doc.plaintext", isActive: selectedTab == .historico, imageBigger: true)
-                /*
-                GeometryReader { geo in
-                    if selectedTab == .chats {
-                        Rectangle()
-                            .foregroundColor(.blue)
-                            .frame(width: geo.size.width/2, height: 4)
-                            .padding(.leading, geo.size.width/4)
-                    }
-                        VStack (alignment: .center, spacing: 4) {
-                            Image(systemName: "bubble.left")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                            Text("Chats")
-                            // Agregar el archivo Helpers
-                            //.font(Font.)
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                }
-                 */
+                TabBarButton(buttonText: "Mensual", imageName: "calendar", isActive: selectedTab == .historico, imageBigger: true)
+            }
+            Button {
+                selectedTab = .historico1
+                globalState.verMasVista = false
+                globalState.filtroview = false
+            } label: {
+                TabBarButton(buttonText: "Diario", imageName: "doc.plaintext", isActive: selectedTab == .historico1, imageBigger: true)
             }
             //Agregar el archivo
             //.tint(Color("icons-secundary"))
             if globalState.esAdmin {
                 Button {
-                    //
                     isShowingPopUp = true
                 } label: {
                     GeometryReader { geo in
@@ -67,8 +52,6 @@ struct CustomTabBar: View {
                                 .frame(width: 40, height: 40)
                             
                             Text("Nuevo")
-                            // Agregar el archivo Helpers
-                            //.font(Font.)
                         }
                         
                         .frame(width: geo.size.width, height: geo.size.height)
@@ -82,36 +65,15 @@ struct CustomTabBar: View {
             Spacer()
             Button {
                 selectedTab = .config
-                //
             } label: {
-                //
-                TabBarButton(buttonText: "Configuracion", imageName: "gear", isActive: selectedTab == .config, imageBigger: true)
-                /*
-                GeometryReader { geo in
-                    if selectedTab == .contacts{
-                        Rectangle()
-                            .foregroundColor(.blue)
-                            .frame(width: geo.size.width/2, height: 4)
-                            .padding(.leading, geo.size.width/4)
-                    }
-                        VStack (alignment: .center, spacing: 4) {
-                            Image(systemName: "person")
-                                .resizable()
-                                .scaledToFit()
-                                .frame(width: 24, height: 24)
-                            Text("Contacts")
-                            // Agregar el archivo Helpers
-                            //.font(Font.)
-                        }
-                        .frame(width: geo.size.width, height: geo.size.height)
-                }
-                 */
+                TabBarButton(buttonText: globalState.esAdmin ? "Config" : "Configuracion", imageName: "gear", isActive: selectedTab == .config, imageBigger: true)
             }
-            //Agregar el archivo
-            //.tint(Color("icons-secundary"))
+            
         }
         .frame(height: 82)
+        
     }
+    
 }
 
 struct CustomTabBar_Previews: PreviewProvider {

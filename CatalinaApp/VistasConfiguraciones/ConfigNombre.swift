@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import FirebaseAnalyticsSwift
 
 struct ConfigNombre: View {
     @State private var txtfielnn: String = ""
@@ -49,6 +50,7 @@ struct ConfigNombre: View {
             }// Se puede poner la funcion de disabled para la DB y los usuarios
             Spacer()
         }
+        .analyticsScreen(name: "\(ConfigNombre.self)")
     }
 }
 

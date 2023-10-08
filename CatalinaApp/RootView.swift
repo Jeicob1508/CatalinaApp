@@ -125,7 +125,15 @@ struct VistaRoot: View {
                         .transaction { transaction in
                             transaction.animation = nil
                         }
-                            
+                    
+                    Historico3()
+                        .environmentObject(globalState)
+                        .tag(Tabs.historico1)
+                        .id(UUID())
+                        .transaction { transaction in
+                            transaction.animation = nil
+                        }
+                    
                     ConfiguracionView()
                         .environmentObject(globalState)
                         .tag(Tabs.config)
