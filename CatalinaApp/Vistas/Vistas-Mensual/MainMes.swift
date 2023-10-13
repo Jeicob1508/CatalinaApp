@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Historico2: View {
+struct MainMes: View {
     @StateObject private var globalState = GlobalState()
     
     var body: some View {
@@ -19,17 +19,16 @@ struct Historico2: View {
 struct HistoricoEx: View {
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
+    @Environment(\.colorScheme) var colorScheme
     @State var selectedTab: Tabs = .historico
-    
     
     var body: some View {
         ZStack{
             VStack{
-                HistoricoView()
+                VistaMes()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
                     .edgesIgnoringSafeArea(.all)
@@ -39,25 +38,27 @@ struct HistoricoEx: View {
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
+            /*
             if globalState.verMasVista{
                 VerMasVista()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
+             */
             if globalState.verMasVista2{
-                VerMasVista2()
+                MasInfoMes()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
@@ -73,7 +74,7 @@ struct HistoricoEx: View {
 
 struct Historico2_Previews: PreviewProvider {
     static var previews: some View {
-        Historico2()
+        MainMes()
     }
 }
 

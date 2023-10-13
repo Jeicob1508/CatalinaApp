@@ -36,32 +36,39 @@ struct HistoricoView22: View {
     
     var body: some View {
         VStack{
+            Spacer().frame(height: 15)
             Text("Resumen Diario")
-                .font(.headline)
+                .font(.title)
+                .font(.system(size: 20))
             List{
                 ForEach(catalinaDB, id: \.id) { catalinaDB in
                     VStack(alignment: .leading){
                         HStack{
-                            Text("Tratamiento: ")
-                            Text(String(format: "%.3f", catalinaDB.tratamiento))
+                            Text("\(catalinaDB.fecha ?? self.fecha, formatter: Self.fechaFormato)")
+                                .font(.system(size: 16))
                                 .foregroundColor(.primary)
+
                         }
-                        Text("\(catalinaDB.fecha ?? self.fecha, formatter: Self.fechaFormato)")
-                            .font(.caption)
-                            .foregroundColor(.secondary)
-                            .padding(.bottom, 0.2)
+                        HStack{
+                            Text("Tratamiento: ")
+                                .font(.system(size: 10))
+                            Text(String(format: "%.3f", catalinaDB.tratamiento))
+                                .font(.system(size: 10))
+                                .padding(.bottom, 0.2)
+                        }
                         HStack{
                             Button(action: {
                                 // Accion de Like
                             }) {
                                 Image(systemName: "hand.thumbsup")
                                     .foregroundColor(.blue)
+                                    .font(.system(size: 18))
                             }
                             Spacer()
                             Button(action:{
                                 if let fecha = catalinaDB.fecha {
                                     globalState.verMasVista.toggle()
-                                    globalState.fechaInfo = fecha
+                                    //globalState.fechaInfo = fecha
                                 }
                             }){
                                 Text("Ver más")

@@ -19,6 +19,7 @@ struct Historico3: View {
 struct HistoricoEx2: View {
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
+    @Environment(\.colorScheme) var colorScheme
     @State var selectedTab: Tabs = .historico1
     
     
@@ -29,7 +30,6 @@ struct HistoricoEx2: View {
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
                     .edgesIgnoringSafeArea(.all)
@@ -39,25 +39,28 @@ struct HistoricoEx2: View {
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
+
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
+            /*
             if globalState.verMasVista{
                 VerMasVista()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
+             */
             if globalState.verMasVista2{
-                VerMasVista2()
+                MasInfoMes()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }

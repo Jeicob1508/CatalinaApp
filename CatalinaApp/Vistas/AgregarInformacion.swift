@@ -174,55 +174,39 @@ struct AgregarInformacion: View {
                 Spacer().frame(height: 50)
                 
                 VStack(spacing: 10) {
-                    Text("Plomo")
+                    Text("Tratamiento")
                         .font(.title)
                         .bold()
                     
-                    TextField("Producción", text: $txtfieldP)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Calidad", text: $txtfieldL)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Valor:", texto2: "Tratamiento", variable: $txtfieldtra)
+                    creartxtField(texto1: "Ley de Plomo: ", texto2: "Ley de Plomo", variable: $txtfieldley_pb)
+                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc:", variable: $txtfieldley_zn)
+                }
+                
+                VStack(spacing: 10) {
+                    Text("Plomo")
+                        .font(.title)
+                        .bold()
+                    creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldP)
+                    creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldL)
                         .onChange(of: txtfieldL) { newValue in
                             calcularPlomoFinos()
                         }
-                    TextField("Recuperación", text: $txtfieldR)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Recuperación:", texto2: "Ingresa un valor", variable: $txtfieldR)
                 }
-                .frame(width: 200)
                 
                 VStack(spacing: 10) {
                     Text("Zinc")
                         .font(.title)
                         .bold()
                     
-                    TextField("Producción", text: $txtfieldzP)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Calidad", text: $txtfieldzL)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldzP)
+                    creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldzL)
                         .onChange(of: txtfieldzL) { newValue in
                             calcularZincFinos()
                         }
-                    TextField("Recuperación", text: $txtfieldzR)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Recuperación:", texto2: "Ingresa un valor", variable: $txtfieldzR)
                 }
-                .frame(width: 200)
-                
-                VStack(spacing: 10) {
-                    Text("Tratamiento")
-                        .font(.title)
-                        .bold()
-                    
-                    TextField("Valor", text: $txtfieldtra)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("Ley de Plomo", text: $txtfieldley_pb)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("Ley de Zinc", text: $txtfieldley_zn)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                }
-                .frame(width: 200)
                 
                 HStack {
                     Spacer()
@@ -252,32 +236,32 @@ struct AgregarInformacion: View {
                             hasExistingData = buscarFechaExistente(day: selectedDay, month: selectedMonth, year: selectedYear)
                         }
                 }
-
-                HStack{
-                    Text("Ya se encuentra un registro en esa fecha, estas editando el registro ya existente.")
-                        .foregroundColor(.red) // You can choose your desired color
-                        .font(.headline)
-                        .opacity( hasExistingData ? 1 : 0)
-                    Button(action: {
-                        editarDatos()
-                    }) {
-                        HStack {
-                            Image(systemName: "eye")
-                                .foregroundColor(.white)
-                            Spacer()
-                            Text("Ver")
-                                .font(.headline)
-                                .foregroundColor(.white)
-                            Spacer()
+                
+                if hasExistingData{
+                    HStack{
+                        Text("Ya se encuentra un registro en esa fecha, estas editando el registro ya existente.")
+                            .foregroundColor(.red) // You can choose your desired color
+                            .font(.headline)
+                        Button(action: {
+                            editarDatos()
+                        }) {
+                            HStack {
+                                Image(systemName: "eye")
+                                    .foregroundColor(.white)
+                                Spacer()
+                                Text("Ver")
+                                    .font(.headline)
+                                    .foregroundColor(.white)
+                                Spacer()
+                            }
+                            .frame(width: 100, height: 17)
+                            .font(.system(size: 15, weight: .semibold))
+                            .font(.headline)
+                            .foregroundColor(.white)
+                            .padding()
+                            .background(Color.gray)
+                            .cornerRadius(10)
                         }
-                        .frame(width: 100, height: 17)
-                        .font(.system(size: 15, weight: .semibold))
-                        .font(.headline)
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(Color.gray)
-                        .cornerRadius(10)
-                        .opacity( hasExistingData ? 1 : 0)
                     }
                 }
                 VStack{
@@ -355,6 +339,20 @@ struct AgregarInformacion: View {
                     Spacer()
                 }
             }
+        }
+    }
+    
+    func creartxtField(texto1: String, texto2: String, variable: Binding<String>) -> some View {
+        return HStack {
+            Spacer().frame(width: 15)
+            Text(texto1)
+                .font(.title3)
+                .frame(width: 140, alignment: .leading)
+            Spacer()
+            TextField(texto2, text: variable)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.decimalPad)
+            Spacer().frame(width: 15)
         }
     }
     

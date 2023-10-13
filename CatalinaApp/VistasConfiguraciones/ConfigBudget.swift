@@ -7,12 +7,17 @@
 
 import SwiftUI
 import CoreData
+import FirebaseDatabase
+import UIKit
 
 struct ConfigBudget: View {
+    @State private var showAlert2 = false
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
     @State private var fechaMes = Calendar.current.component(.month, from: Date()) - 1
     private let months = Calendar.current.monthSymbols
+    
+    private let database = Database.database().reference()
     
     @State private var txtfieldd: String = ""
     @State private var txtfielmm: String = ""
@@ -60,6 +65,9 @@ struct ConfigBudget: View {
     
     @State private var registroExistente: Budget?
     
+    @State private var inputText = "" // Valor de entrada como cadena
+    @State private var formattedText = "0.000" // Valor formateado
+    
     @State private var txtfieldanio = "\(Calendar.current.component(.year, from: Date()))"
     
     private func recordExistsForMonthAndYear(month: Int, year: Int) -> Bool {
@@ -83,85 +91,30 @@ struct ConfigBudget: View {
         }
     }
     
-    private func agregarInformacion() {
-        
-        let agregar = Budget(context: self.moc)
-        
-        agregar.pb_prodB = self.varpl_prod
-        agregar.pb_leyB = self.varpl_ley
-        agregar.pb_recB = self.varpl_rec
-        
-        agregar.zn_prodB = self.varzn_prod
-        agregar.zn_leyB = self.varzn_ley
-        agregar.zn_recB = self.varzn_rec
-        
-        agregar.pb_finosB = self.pb_finos
-        agregar.zn_finosB = self.zn_finos
-        
-        agregar.tratamientoB = self.vartra
-        
-        agregar.pb_leyyB = self.varley_pb
-        agregar.zn_leyyB = self.varley_zn
-        
-        agregar.pb_headB = self.head_pb
-        agregar.zn_headB = self.head_zn
-        
-        agregar.budget_mes = self.varfecha
-        
-        agregar.id = UUID()
-        
-        do {
-            try moc.save()
-        } catch {
-            let nsError = error as NSError
-            print("Error al guardar la transacción: \(nsError), \(nsError.userInfo)")
-        }
-    }
-    
-    private func editarInformacion() {
-        let fetchRequest: NSFetchRequest<Budget> = Budget.fetchRequest()
-        let predicate = NSPredicate(format: "id == %@", editarIP as CVarArg)
-        fetchRequest.predicate = predicate
-        
-        do {
-            let records = try moc.fetch(fetchRequest)
+    private func nuevaEntradaFB() {
+        let object: [String: Any] = [
+            "id"            : self.varfecha,
             
-            if let record = records.first {
-                record.pb_prodB = self.varpl_prod
-                record.pb_leyB = self.varpl_ley
-                record.pb_recB = self.varpl_rec
-                
-                record.zn_prodB = self.varzn_prod
-                record.zn_leyB = self.varzn_ley
-                record.zn_recB = self.varzn_rec
-                
-                record.pb_finosB = self.pb_finos
-                record.zn_finosB = self.zn_finos
-                
-                record.tratamientoB = self.vartra
-                
-                record.pb_leyyB = self.varley_pb
-                record.zn_leyyB = self.varley_zn
-                
-                record.pb_headB = self.head_pb
-                record.zn_headB = self.head_zn
-                
-                record.budget_mes = self.varfecha
-                
-                
-                // Guarda los cambios en el contexto
-                do {
-                    try moc.save()
-                    print("Registro editado exitosamente.")
-                } catch {
-                    print("Error saving record: \(error.localizedDescription)")
-                }
-            } else {
-                print("No se encontró el registro con la ID especificada.")
-            }
-        } catch {
-            print("Error fetching records: \(error.localizedDescription)")
-        }
+            "tratamiento"   : self.vartra,
+            "varLeyPB"      : self.varley_pb,
+            "varLeyZN"      : self.varley_zn,
+            
+            "PBProduccion"  : self.varpl_prod,
+            "PBCalidad"     : self.varpl_ley,
+            "PBRecuperacion": self.varpl_rec,
+            
+            "ZNProduccion"  : self.varzn_prod,
+            "ZNCalidad"     : self.varzn_ley,
+            "ZNRecuperacion": self.varzn_rec,
+            
+            "PBFinos"       : self.pb_finos,
+            "ZNFinos"       : self.zn_finos,
+            
+            "PBHead"        : self.head_pb,
+            "ZNHead"        : self.head_zn
+            
+        ]
+        database.child("Budget").child("Budget-\(self.varfecha)").setValue(object)
     }
     
     var body: some View {
@@ -170,62 +123,37 @@ struct ConfigBudget: View {
                 Spacer().frame(height: 20)
                 
                 VStack(spacing: 10) {
-                    Text("Plomo")
+                    Text("Tratamiento")
                         .font(.title)
                         .bold()
                     
-                    TextField("Producción", text: $txtfieldP)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Calidad", text: $txtfieldL)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Valor:", texto2: "Tratamiento", variable: $txtfieldtra)
+                    creartxtField(texto1: "Ley de Plomo: ", texto2: "Ley de Plomo", variable: $txtfieldley_pb)
+                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc:", variable: $txtfieldley_zn)
+                }
+                VStack(spacing: 10) {
+                    Text("Plomo")
+                        .font(.title)
+                        .bold()
+                    creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldP)
+                    creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldL)
                         .onChange(of: txtfieldL) { newValue in
                             calcularPlomoFinos()
                         }
-                    TextField("Recuperación", text: $txtfieldR)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Recuperación:", texto2: "Ingresa un valor", variable: $txtfieldR)
                 }
-                .frame(width: 200)
-                
-                
                 VStack(spacing: 10) {
                     Text("Zinc")
                         .font(.title)
                         .bold()
                     
-                    TextField("Producción", text: $txtfieldzP)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    TextField("Calidad", text: $txtfieldzL)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldzP)
+                    creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldzL)
                         .onChange(of: txtfieldzL) { newValue in
                             calcularZincFinos()
                         }
-                    TextField("Recuperación", text: $txtfieldzR)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    creartxtField(texto1: "Recuperación:", texto2: "Ingresa un valor", variable: $txtfieldzR)
                 }
-                .frame(width: 200)
-                
-                VStack(spacing: 10) {
-                    Text("Tratamiento")
-                        .font(.title)
-                        .bold()
-                    
-                    TextField("Valor", text: $txtfieldtra)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("Ley de Plomo", text: $txtfieldley_pb)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                    TextField("Ley de Zinc", text: $txtfieldley_zn)
-                        .textFieldStyle(RoundedBorderTextFieldStyle())
-                    
-                }
-                .frame(width: 200)
-                /*
-                 VStack {
-                 Text(String(format: "Plomo finos: %.3f", pb_finos))
-                 Text(String(format: "Zinc finos: %.3f", zn_finos))
-                 }
-                 */
                 HStack {
                     Spacer()
                     Text("Fecha:")
@@ -258,38 +186,40 @@ struct ConfigBudget: View {
 
                 
                 VStack{
-                    HStack{
-                        Text("Ya se encuentra un registro en esa fecha, estas editando el registro ya existente.")
-                            .foregroundColor(.red) // You can choose your desired color
-                            .font(.headline)
-                            .opacity( recordExists ? 1 : 0)
-                        Button(action: {
-                            editarDatos()
-                        }) {
-                            HStack {
-                                Image(systemName: "eye")
-                                    .foregroundColor(.white)
-                                Spacer()
+                    if recordExists{
+                        HStack{
+                            Text("Ya se encuentra un registro en esa fecha, estas editando el registro ya existente.")
+                                .foregroundColor(.red)
+                                .font(.headline)
+                            Button(action: {
+                                editarDatos()
+                            }) {
+                                HStack {
+                                    Image(systemName: "eye")
+                                        .foregroundColor(.white)
+                                    Spacer()
                                     Text("Ver")
                                         .font(.headline)
                                         .foregroundColor(.white)
-                                Spacer()
+                                    Spacer()
+                                }
+                                .frame(width: 100, height: 17)
+                                .font(.system(size: 15, weight: .semibold))
+                                .font(.headline)
+                                .foregroundColor(.white)
+                                .padding()
+                                .background(Color.gray)
+                                .cornerRadius(10)
                             }
-                            .frame(width: 100, height: 17)
-                            .font(.system(size: 15, weight: .semibold))
-                            .font(.headline)
-                            .foregroundColor(.white)
-                            .padding()
-                            .background(Color.gray)
-                            .cornerRadius(10)
-                            .opacity( recordExists ? 1 : 0)
                         }
                     }
                     HStack {
                         Spacer()
                         
                         Button(action: {
-                            globalState.configBudge.toggle()
+                            withAnimation{
+                                globalState.configBudge.toggle()
+                            }
                         }) {
                             HStack {
                                 Image(systemName: "xmark")
@@ -325,16 +255,13 @@ struct ConfigBudget: View {
                             varley_pb = Double(txtfieldley_pb) ?? 0.000
                             varley_zn = Double(txtfieldley_zn) ?? 0.000
                             
-                            calcularmes()
-                            if recordExists{
-                                editarInformacion()
-                            } else{
-                                agregarInformacion()
-                            }
                             calcular()
+                            calcularmes()
+                            
+                            nuevaEntradaFB()
                             globalState.configBudge.toggle()
                             
-                        }) {
+                        }){
                             HStack {
                                 Image(systemName: recordExists ? "pencil" : "plus")
                                     .foregroundColor(.white)
@@ -359,6 +286,20 @@ struct ConfigBudget: View {
             }
         }
         .multilineTextAlignment(.center)
+    }
+    
+    func creartxtField(texto1: String, texto2: String, variable: Binding<String>) -> some View {
+        return HStack {
+            Spacer().frame(width: 15)
+            Text(texto1)
+                .font(.title3)
+                .frame(width: 140, alignment: .leading)
+            Spacer()
+            TextField(texto2, text: variable)
+                .textFieldStyle(RoundedBorderTextFieldStyle())
+                .keyboardType(.decimalPad)
+            Spacer().frame(width: 15)
+        }
     }
     
     func calcular(){
@@ -392,6 +333,19 @@ struct ConfigBudget: View {
             txtfieldtra = "\(registro.tratamientoB)"
             txtfieldley_pb = "\(registro.pb_leyyB)"
             txtfieldley_zn = "\(registro.zn_leyyB)"
+        }
+    }
+    func formatInputText() {
+        // Convertir la cadena de entrada a un número decimal
+        if let inputValue = Double(inputText) {
+            // Formatear el número con tres decimales
+            let formattedValue = String(format: "%.3f", inputValue)
+            formattedText = formattedValue
+            inputText = formattedValue // Reemplazar la entrada con el valor formateado
+        } else {
+            // Manejar la entrada no válida aquí
+            // Por ejemplo, puedes mostrar un mensaje de error
+            print("Entrada no válida")
         }
     }
 }

@@ -20,6 +20,11 @@ class GlobalState: ObservableObject {
             UserDefaults.standard.set(tipoFecha, forKey: "tipoFecha")
         }
     }
+    @Published var modoOscuro:Bool {
+        didSet {
+            UserDefaults.standard.set(modoOscuro, forKey: "modoOscuro")
+        }
+    }
     // Pestaña de Config donde se cambia el Budget
     @Published var configBudge:Bool {
         didSet {
@@ -63,34 +68,27 @@ class GlobalState: ObservableObject {
         }
     }
     // Variable de Apellido
-    @Published var apellidoPer:String {
+    @Published var apellidoPer: String {
         didSet {
             UserDefaults.standard.set(apellidoPer, forKey: "apellidoPer")
         }
     }
     // Variable para obtener la fecha de filtro
-    @Published var fechaInfo: Date {
+    @Published var fechaInfo: Int {
         didSet {
             UserDefaults.standard.set(fechaInfo, forKey: "fechaInfo")
         }
     }
     init() {
         self.tipoFecha = Bool(UserDefaults.standard.bool(forKey: "tipoFecha"))
-        
+        self.modoOscuro = false
         self.filtroview = false
         self.configNA = false
         self.verMasVista = false
         self.verMasVista2 = false
         self.configBudge = false
-        
         self.BudgetMes = 0
-        
-        if let storedDate = UserDefaults.standard.object(forKey: "fechaInfo") as? Date {
-            self.fechaInfo = storedDate
-        } else {
-            self.fechaInfo = Date() // Valor predeterminado si no se encuentra en UserDefaults
-        }
-        
+        self.fechaInfo = 0
         self.esAdmin = Bool(UserDefaults.standard.bool(forKey: "esAdmin"))
         self.nombrePer = UserDefaults.standard.string(forKey: "nombrePer") ?? "NombreD"
         self.apellidoPer = UserDefaults.standard.string(forKey: "apellidoPer") ?? "ApellidoD"
@@ -108,6 +106,7 @@ struct RootView: View {
 }
 
 struct VistaRoot: View {
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
     @State var selectedTab: Tabs = .historico
@@ -118,7 +117,7 @@ struct VistaRoot: View {
         ZStack{
             VStack {
                 TabView(selection: $selectedTab) {
-                    Historico2()
+                    MainMes()
                         .environmentObject(globalState)
                         .tag(Tabs.historico)
                         .id(UUID())
@@ -153,16 +152,16 @@ struct VistaRoot: View {
             if globalState.configNA{
                 ConfigNombre()
                     .environment(\.managedObjectContext, self.moc)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
             if globalState.configBudge{
                 ConfigBudget()
                     .environment(\.managedObjectContext, self.moc)
+                    .background(colorScheme == .light ? Color.white : Color.black)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(Color.white)
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
