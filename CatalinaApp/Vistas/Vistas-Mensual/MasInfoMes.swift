@@ -12,41 +12,19 @@ struct MasInfoMes: View {
 
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var globalState: GlobalState
-    @State private var fechaSeleccionada: Date = Date()
+    @StateObject var viewModel = ReadViewModel()
     @State private var vRMpl_ley: Double = 0.000
     @State private var vRMpl_prod: Double = 0.000
     @State private var vRMpl_rec: Double = 0.000
     @State private var vRMpl_finos: Double = 0.000
-    
-    @State private var numEntrada: Double = 0.000
-    
     @State private var vRMzn_ley: Double = 0.000
     @State private var vRMzn_prod: Double = 0.000
     @State private var vRMzn_rec: Double = 0.000
     @State private var vRMzn_finos: Double = 0.000
-    
     @State private var vRMtratamiento: Double = 0.000
     
-    @State private var vRMpl_leyB: Double = 0.000
-    @State private var vRMpl_prodB: Double = 0.000
-    @State private var vRMpl_recB: Double = 0.000
-    @State private var vRMpl_finosB: Double = 0.000
-    
-    @State private var vRMzn_leyB: Double = 0.000
-    @State private var vRMzn_prodB: Double = 0.000
-    @State private var vRMzn_recB: Double = 0.000
-    @State private var vRMzn_finosB: Double = 0.000
-    
-    @State private var vRMtratamientoB: Double = 0.000
-    
-    @State private var num_alto: Double = 0.000
-    
-    @StateObject var viewModel = ReadViewModel()
-
-    @State private var objectIdToFind: Int = 0
-    @State private var framess = false
-    
     @Environment(\.managedObjectContext) private var moc
+    @State private var numEntrada: Double = 0.000
     
     let coloresFondo: [Color] = [
         Color(red: 206/255, green: 226/255, blue: 227/255), // Azul claro pastel
@@ -66,7 +44,6 @@ struct MasInfoMes: View {
         var formattedMonth: String {
             let fechaInfo = "\(globalState.fechaInfo)"
             let monthString = String(fechaInfo.prefix(2))
-            let yearString = String(fechaInfo.suffix(4))
             
             let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "MM"
@@ -86,51 +63,18 @@ struct MasInfoMes: View {
             return yearString
         }
         
-        VStack {
-            Spacer().frame(height: 20)
-            Text("\(formattedMonth) del \(fechaanio)") // Mostrar el mes en el título
-                .font(.title)
-            
-            if !viewModel.listObject_Budget.isEmpty {
-                VStack{
-                    ForEach(viewModel.listObject_Budget, id: \.self) { object in
-                        HStack{
-                            Text("Tratamiento: ")
-                            Text(String(object.tratamiento))
-                        }
-                    }
-                }
-            } else{
-                Text("No hay nada")
-            }
-        }.onAppear {
-            viewModel.findObject(objectIdToFind: globalState.fechaInfo)
-        }
-            /*
-            if !viewModel.listObject_Budget.isEmpty {
-                ForEach(viewModel.listObject_Budget, id: \.self) { object in
-                    VStack{
-                        vRMtratamientoB = object.tratamiento
-                        vRMpl_prodB = object.PBProduccion
-                        let vRMpl_leyB = object.PBCalidad
-                        let vRMpl_recB = object.PBRecuperacion
-                        let vRMpl_finosB = object.PBFinos
-                        let vRMzn_prodB = object.ZNProduccion
-                        let vRMzn_leyB = object.ZNCalidad
-                        let vRMzn_recB = object.ZNRecuperacion
-                        let vRMzn_finosB = object.ZNFinos
-                    }
-                }
-            }
-        }.onAppear {
-            viewModel.findObject(objectIdToFind: globalState.fechaInfo)
-        }
-        */
         ScrollView (showsIndicators: false) {
+            HStack{
+                Spacer()
+                Text("\(formattedMonth) del \(fechaanio)")
+                    .font(.title)
+                    .padding()
+                Spacer()
+            }
             Spacer().frame(height: 30)
             VStack{
                 
-                crearGrafico(valor0: "(TMS)",valor1: "Tratamiento", valor: CGFloat(vRMtratamiento), valor2: CGFloat(vRMtratamientoB), valor3: 250, valor4: coloresFondo[4])
+                crearGrafico(valor0: "(TMS)",valor1: "Tratamiento", valor: CGFloat(vRMtratamiento), valor2: CGFloat(globalState.TuplaBudget.1), valor3: 250, valor4: coloresFondo[4])
                     .transition(.move(edge: .top))
                 Spacer().frame(height: 20)
                 
@@ -142,14 +86,17 @@ struct MasInfoMes: View {
                 Text("Plomo")
                     .font(.title2)
                 HStack{
-                    crearGrafico(valor0: "(TMS)",valor1: "Produccion", valor: CGFloat(vRMpl_prod), valor2: CGFloat(vRMpl_prodB), valor3: 125, valor4: coloresFondo[1])
+                    crearGrafico(valor0: "(TMS)",valor1: "Produccion", valor: CGFloat(vRMpl_prod), valor2: CGFloat(globalState.TuplaBudget.4), valor3: 125, valor4: coloresFondo[1])
                     let temp = vRMpl_ley / numEntrada
-                    crearGrafico(valor0: "(%Pb)",valor1: "Calidad", valor: CGFloat(temp), valor2: CGFloat(vRMpl_leyB), valor3: 125, valor4: coloresFondo[1])
+                    crearGrafico(valor0: "(%Pb)",valor1: "Calidad", valor: CGFloat(temp), valor2:
+                        CGFloat(globalState.TuplaBudget.5), valor3: 125, valor4: coloresFondo[1])
                 }
                 HStack{
                     let temp2 = vRMpl_rec / numEntrada
-                    crearGrafico(valor0: "(%Pb)",valor1: "Recuperación", valor: CGFloat(temp2), valor2: CGFloat(vRMpl_recB), valor3: 125, valor4: coloresFondo[1])
-                    crearGrafico(valor0: "(TMS)",valor1: "Finos", valor: CGFloat(vRMpl_finos), valor2: CGFloat(vRMpl_finosB), valor3: 125, valor4: coloresFondo[1])
+                    crearGrafico(valor0: "(%Pb)",valor1: "Recuperación", valor: CGFloat(temp2), valor2:
+                        CGFloat(globalState.TuplaBudget.6), valor3: 125, valor4: coloresFondo[1])
+                    crearGrafico(valor0: "(TMS)",valor1: "Finos", valor: CGFloat(vRMpl_finos), valor2:
+                        CGFloat(globalState.TuplaBudget.10), valor3: 125, valor4: coloresFondo[1])
                 }
                 Spacer().frame(height: 20)
                 
@@ -162,17 +109,20 @@ struct MasInfoMes: View {
                 Text("Zinc")
                     .font(.title2)
                 HStack{
-                    crearGrafico(valor0: "(TMS)",valor1: "Produccion", valor: CGFloat(vRMzn_prod), valor2: CGFloat(vRMzn_prodB), valor3: 125, valor4: coloresFondo[2])
+                    crearGrafico(valor0: "(TMS)",valor1: "Produccion", valor: CGFloat(vRMzn_prod), valor2: CGFloat(globalState.TuplaBudget.7), valor3: 125, valor4: coloresFondo[2])
                     let temp3 = vRMzn_ley / numEntrada
-                    crearGrafico(valor0: "(%Zn)",valor1: "Calidad", valor: CGFloat(temp3), valor2: CGFloat(vRMzn_leyB), valor3: 125, valor4: coloresFondo[2])
+                    crearGrafico(valor0: "(%Zn)",valor1: "Calidad", valor: CGFloat(temp3), valor2:
+                        CGFloat(globalState.TuplaBudget.8), valor3: 125, valor4: coloresFondo[2])
                 }
                 HStack{
                     let temp4 = vRMzn_rec / numEntrada
-                    crearGrafico(valor0: "(%Zn)",valor1: "Recuperación", valor: CGFloat(temp4), valor2: CGFloat(vRMzn_recB), valor3: 125, valor4: coloresFondo[2])
-                    crearGrafico(valor0: "(TMS)",valor1: "Finos", valor: CGFloat(vRMzn_finos), valor2: CGFloat(vRMzn_finosB), valor3: 125, valor4: coloresFondo[2])
+                    crearGrafico(valor0: "(%Zn)",valor1: "Recuperación", valor: CGFloat(temp4), valor2:
+                        CGFloat(globalState.TuplaBudget.9), valor3: 125, valor4: coloresFondo[2])
+                    crearGrafico(valor0: "(TMS)",valor1: "Finos", valor: CGFloat(vRMzn_finos), valor2:
+                        CGFloat(globalState.TuplaBudget.11), valor3: 125, valor4: coloresFondo[2])
                 }
                 Button(action: {
-                    globalState.verMasVista2 = false
+                    globalState.ToggleMes = false
                 }) {
                     Text("Cerrar")
                 }
@@ -258,8 +208,8 @@ struct MasInfoMes: View {
         
         let temp = nuevoValor1 + nuevoValor2
         
-        if temp > CGFloat(200){
-            let tamanio = 200
+        if nuevoValor1 > CGFloat(120) || nuevoValor2 > CGFloat(120) {
+            let tamanio = 190
             if(valor > valor2){
                 nuevoValor1 = CGFloat(tamanio)
                 altura2 = (nuevoValor2 * nuevoValor1) / valor
@@ -273,12 +223,12 @@ struct MasInfoMes: View {
             return (altura1, altura2)
         }
         else{
-            if nuevoValor1 > 30{
-                altura1 = nuevoValor1
-                altura2 = nuevoValor2
-            } else{
-                altura1 = nuevoValor1 * 3
-                altura2 = nuevoValor2 * 3
+            if nuevoValor1 > 30 || nuevoValor2 > 30 {
+                altura1 = nuevoValor1 * 1.15
+                altura2 = nuevoValor2 * 1.15
+            } else {
+                altura1 = nuevoValor1 * 3.4
+                altura2 = nuevoValor2 * 3.4
             }
             return (altura1, altura2)
         }

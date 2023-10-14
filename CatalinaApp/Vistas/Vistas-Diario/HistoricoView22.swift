@@ -66,10 +66,9 @@ struct HistoricoView22: View {
                             }
                             Spacer()
                             Button(action:{
-                                if let fecha = catalinaDB.fecha {
-                                    globalState.verMasVista.toggle()
-                                    //globalState.fechaInfo = fecha
-                                }
+                                //if let fecha = catalinaDB.fecha {
+                                //    globalState.ToggleDiario.toggle()
+                                //}
                             }){
                                 Text("Ver más")
                             }

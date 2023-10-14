@@ -22,40 +22,29 @@ struct ConfigBudget: View {
     @State private var txtfieldd: String = ""
     @State private var txtfielmm: String = ""
     @State private var txtfielaa: String = ""
-    
     @State private var txtfieldL: String = ""
     @State private var txtfieldP: String = ""
     @State private var txtfieldR: String = ""
-    
     @State private var txtfieldzL: String = ""
     @State private var txtfieldzP: String = ""
     @State private var txtfieldzR: String = ""
-    
     @State private var txtfieldtra: String = ""
-    
     @State private var txtfieldley_pb: String = ""
     @State private var txtfieldley_zn: String = ""
     @State private var resultado: String = ""
-    
     @State private var varpl_ley: Double = 0.000
     @State private var varpl_prod: Double = 0.000
     @State private var varpl_rec: Double = 0.000
-    
     @State private var varley_pb: Double = 0.000
     @State private var varley_zn: Double = 0.000
-    
     @State private var varzn_ley: Double = 0.000
     @State private var varzn_prod: Double = 0.000
     @State private var varzn_rec: Double = 0.000
-    
     @State private var pb_finos: Double = 0.000
     @State private var zn_finos: Double = 0.000
-    
     @State private var head_pb: Double = 0.000
     @State private var head_zn: Double = 0.000
-    
     @State private var vartra: Double = 0.000
-    
     @State private var varfecha: Int64 = 0
     @State private var mesfecha: Int64 = 0
     @State private var aniofecha: Int64 = 0

@@ -12,9 +12,8 @@ import FirebaseDatabase
 import FirebaseDatabaseSwift
 
 struct VistaMes: View {
-
     @StateObject var viewModel = ReadViewModel()
-
+    @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
     
@@ -56,8 +55,13 @@ struct VistaMes: View {
                                             let budgetmes = (Int(object.id) / 10000)
                                             let budgetanio = (Int(object.id) % 10000)
                                             globalState.fechaInfo = busquedaBudget(budgetAnio: budgetanio, budgetMes: budgetmes) ?? 0
-                                            print(globalState.fechaInfo)
-                                            globalState.verMasVista2.toggle()
+                                            globalState.TuplaBudget = (object.id, object.tratamiento, object.varLeyPB,
+                                                                       object.varLeyZN, object.PBProduccion, object.PBCalidad,
+                                                                       object.PBRecuperacion, object.ZNProduccion, object.ZNCalidad,
+                                                                       object.ZNRecuperacion, object.PBFinos, object.ZNFinos,
+                                                                       object.PBHead, object.ZNHead)
+                                            print("TuplaBudget copiado: \(globalState.TuplaBudget)")
+                                            globalState.ToggleMes.toggle()
                                         }){
                                             Text("Ver más")
                                         }
@@ -81,7 +85,7 @@ struct VistaMes: View {
             }
             .onAppear {
                 viewModel.observeListObjects()
-                print("Error: No hay ningún dato")
+                print("Hola")
             }
         }
     }
@@ -90,6 +94,9 @@ struct VistaMes: View {
         let budgetAnioString = String(format: "%04d", budgetAnio)
         let budgetMesString = String(format: "%02d", budgetMes)
         let concatenatedString =  budgetMesString + budgetAnioString
+        
+        print("La fecha es: \(concatenatedString)")
+        
         return Int(concatenatedString)
     }
     
@@ -125,7 +132,6 @@ struct LoadingView: View {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle(tint: .blue))
                 .frame(width: 80, height: 80)
-                .background(Color.white.opacity(0.5))
                 .cornerRadius(15)
         }
     }

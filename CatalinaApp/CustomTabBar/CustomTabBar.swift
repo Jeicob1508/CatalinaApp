@@ -26,14 +26,14 @@ struct CustomTabBar: View {
             
             Button {
                 selectedTab = .historico
-                globalState.verMasVista = false
+                globalState.ToggleMes = false
                 globalState.filtroview = false
             } label: {
                 TabBarButton(buttonText: "Mensual", imageName: "calendar", isActive: selectedTab == .historico, imageBigger: true)
             }
             Button {
                 selectedTab = .historico1
-                globalState.verMasVista = false
+                globalState.ToggleDiario = false
                 globalState.filtroview = false
             } label: {
                 TabBarButton(buttonText: "Diario", imageName: "doc.plaintext", isActive: selectedTab == .historico1, imageBigger: true)

@@ -38,15 +38,15 @@ class GlobalState: ObservableObject {
         }
     }
     // Pestaña en donde se visualiza la view de ver Mas
-    @Published var verMasVista:Bool {
+    @Published var ToggleMes:Bool {
         didSet {
-            UserDefaults.standard.set(verMasVista, forKey: "verMasVista")
+            UserDefaults.standard.set(ToggleMes, forKey: "ToggleMes")
         }
     }
     // Pestaña en donde se visualiza la view de ver Mas (Resumen Mensual)
-    @Published var verMasVista2:Bool {
+    @Published var ToggleDiario:Bool {
         didSet {
-            UserDefaults.standard.set(verMasVista2, forKey: "verMasVista2")
+            UserDefaults.standard.set(ToggleDiario, forKey: "ToggleDiario")
         }
     }
     // Pestaña donde se visualiza la view de filtros
@@ -79,19 +79,26 @@ class GlobalState: ObservableObject {
             UserDefaults.standard.set(fechaInfo, forKey: "fechaInfo")
         }
     }
+    @Published var dataArray: [ObjectBudget] = []
+    @Published var TuplaBudget: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
+    
     init() {
         self.tipoFecha = Bool(UserDefaults.standard.bool(forKey: "tipoFecha"))
         self.modoOscuro = false
         self.filtroview = false
         self.configNA = false
-        self.verMasVista = false
-        self.verMasVista2 = false
+        self.ToggleMes = false
+        self.ToggleDiario = false
         self.configBudge = false
         self.BudgetMes = 0
         self.fechaInfo = 0
         self.esAdmin = Bool(UserDefaults.standard.bool(forKey: "esAdmin"))
         self.nombrePer = UserDefaults.standard.string(forKey: "nombrePer") ?? "NombreD"
         self.apellidoPer = UserDefaults.standard.string(forKey: "apellidoPer") ?? "ApellidoD"
+        self.dataArray = []
+        self.TuplaBudget = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+
     }
 }
 
@@ -110,7 +117,7 @@ struct VistaRoot: View {
     @EnvironmentObject var globalState: GlobalState
     @Environment(\.managedObjectContext) private var moc
     @State var selectedTab: Tabs = .historico
-    @State var isLoading = false // Variable para controlar la carga
+    @State var isLoading = false
 
     
     var body: some View {
@@ -121,26 +128,16 @@ struct VistaRoot: View {
                         .environmentObject(globalState)
                         .tag(Tabs.historico)
                         .id(UUID())
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
                     
                     Historico3()
                         .environmentObject(globalState)
                         .tag(Tabs.historico1)
                         .id(UUID())
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
                     
                     ConfiguracionView()
                         .environmentObject(globalState)
                         .tag(Tabs.config)
                         .id(UUID())
-                        .transaction { transaction in
-                            transaction.animation = nil
-                        }
-                    
                 }
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .never))
                 

@@ -7,8 +7,11 @@
 
 import SwiftUI
 import CoreData
+import FirebaseDatabase
+import UIKit
 
 struct AgregarInformacion: View {
+    private let database = Database.database().reference()
     @EnvironmentObject var globalState: GlobalState
     @Binding var isShowingPopUp: Bool
     @Environment(\.managedObjectContext) private var moc
@@ -53,6 +56,7 @@ struct AgregarInformacion: View {
     
     @State private var vartra: Double = 0.000
     @State private var editarIP: UUID = UUID()
+    @State private var varfecha: Int64 = 0
     
     @State private var registroExistente: CatalinaDB?
     
@@ -83,91 +87,33 @@ struct AgregarInformacion: View {
             return false
         }
     }
-    
-    private func agregarInformacion() {
 
-        let agregar = CatalinaDB(context: self.moc)
-        
-        agregar.pl_prod = self.varpl_prod
-        agregar.pl_ley = self.varpl_ley
-        agregar.pl_rec = self.varpl_rec
-        
-        agregar.zn_prod = self.varzn_prod
-        agregar.zn_ley = self.varzn_ley
-        agregar.zn_rec = self.varzn_rec
-        
-        agregar.pl_finos = self.pb_finos
-        agregar.zn_finos = self.zn_finos
-        
-        agregar.tratamiento = self.vartra
-        
-        agregar.ley_pb = self.varley_pb
-        agregar.ley_zn = self.varley_zn
-        
-        agregar.headpb = self.head_pb
-        agregar.headzn = self.head_zn
-        
-        let calendar = Calendar.current
-        let components = calendar.dateComponents([.year, .month, .day], from: fechaSeleccionada)
-        agregar.fecha = calendar.date(from: components)!
-        
-        agregar.id = UUID()
-        
-        do {
-            try moc.save()
-        } catch {
-            let nsError = error as NSError
-            print("Error al guardar la transacción: \(nsError), \(nsError.userInfo)")
-        }
-    }
-    
-    private func editarInformacion() {
-        let fetchRequest: NSFetchRequest<CatalinaDB> = CatalinaDB.fetchRequest()
-        let predicate = NSPredicate(format: "id == %@", editarIP as CVarArg)
-        fetchRequest.predicate = predicate
-        
-        do {
-            let records = try moc.fetch(fetchRequest)
+    private func nuevaEntradaFB() {
+        let object: [String: Any] = [
+            "id"            : self.varfecha,
             
-            if let record = records.first {
-                record.pl_prod = self.varpl_prod
-                record.pl_ley = self.varpl_ley
-                record.pl_rec = self.varpl_rec
-                
-                record.zn_prod = self.varzn_prod
-                record.zn_ley = self.varzn_ley
-                record.zn_rec = self.varzn_rec
-                
-                record.pl_finos = self.pb_finos
-                record.zn_finos = self.zn_finos
-                
-                record.tratamiento = self.vartra
-                
-                record.ley_pb = self.varley_pb
-                record.ley_zn = self.varley_zn
-                
-                record.headpb = self.head_pb
-                record.headzn = self.head_zn
-                
-                let calendar = Calendar.current
-                let components = calendar.dateComponents([.year, .month, .day], from: fechaSeleccionada)
-                record.fecha = calendar.date(from: components)!
-                
-                // Guarda los cambios en el contexto
-                do {
-                    try moc.save()
-                    print("Registro editado exitosamente.")
-                } catch {
-                    print("Error saving record: \(error.localizedDescription)")
-                }
-            } else {
-                print("No se encontró el registro con la ID especificada.")
-            }
-        } catch {
-            print("Error fetching records: \(error.localizedDescription)")
-        }
+            "tratamiento"   : self.vartra,
+            "varLeyPB"      : self.varley_pb,
+            "varLeyZN"      : self.varley_zn,
+            
+            "PBProduccion"  : self.varpl_prod,
+            "PBCalidad"     : self.varpl_ley,
+            "PBRecuperacion": self.varpl_rec,
+            
+            "ZNProduccion"  : self.varzn_prod,
+            "ZNCalidad"     : self.varzn_ley,
+            "ZNRecuperacion": self.varzn_rec,
+            
+            "PBFinos"       : self.pb_finos,
+            "ZNFinos"       : self.zn_finos,
+            
+            "PBHead"        : self.head_pb,
+            "ZNHead"        : self.head_zn
+            
+        ]
+        database.child("Daily").child("Daily-\(self.varfecha)").setValue(object)
     }
-    
+
     var body: some View {
         ScrollView{
             VStack() {
@@ -223,15 +169,23 @@ struct AgregarInformacion: View {
                         .onAppear {
                             if globalState.tipoFecha {
                                 fechaSeleccionada = Date()
+                                
                             } else {
                                 fechaSeleccionada = Calendar.current.date(byAdding: .day, value: -1, to: Date()) ?? Date()
                             }
+                            let selectedDay = Calendar.current.component(.day, from: fechaSeleccionada)
+                            let selectedMonth = Calendar.current.component(.month, from: fechaSeleccionada)
+                            let selectedYear = Calendar.current.component(.year, from: fechaSeleccionada)
+                            
+                            varfecha = Int64((selectedDay * 1000000) + (selectedMonth * 10000) + selectedYear)
                         }
                         .onChange(of: fechaSeleccionada) { newValue in
                             
                             let selectedDay = Calendar.current.component(.day, from: newValue)
                             let selectedMonth = Calendar.current.component(.month, from: newValue)
                             let selectedYear = Calendar.current.component(.year, from: newValue)
+                            
+                            varfecha = Int64((selectedDay * 1000000) + (selectedMonth * 10000) + selectedYear)
                             
                             hasExistingData = buscarFechaExistente(day: selectedDay, month: selectedMonth, year: selectedYear)
                         }
@@ -309,9 +263,9 @@ struct AgregarInformacion: View {
                             calcular()
                             
                             if hasExistingData{
-                                editarInformacion()
+                                nuevaEntradaFB()
                             } else{
-                                agregarInformacion()
+                                nuevaEntradaFB()
                             }
                             
                             isShowingPopUp = false

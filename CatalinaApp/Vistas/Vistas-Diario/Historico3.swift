@@ -44,32 +44,12 @@ struct HistoricoEx2: View {
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
-            /*
-            if globalState.verMasVista{
-                VerMasVista()
-                    .environmentObject(globalState)
-                    .environment(\.managedObjectContext, self.moc)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(colorScheme == .light ? Color.white : Color.black)
-                    .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
-                    .zIndex(1)
-            }
-             */
-            if globalState.verMasVista2{
-                MasInfoMes()
-                    .environmentObject(globalState)
-                    .environment(\.managedObjectContext, self.moc)
-                    .frame(maxWidth: .infinity, maxHeight: .infinity)
-                    .background(colorScheme == .light ? Color.white : Color.black)
-                    .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
-                    .zIndex(1)
-            }
         }
         .edgesIgnoringSafeArea(.all)
         .onAppear{
             globalState.filtroview = false
-            globalState.verMasVista = false
-            globalState.verMasVista2 = false
+            globalState.ToggleMes = false
+            globalState.ToggleDiario = false
         }
     }
 }
