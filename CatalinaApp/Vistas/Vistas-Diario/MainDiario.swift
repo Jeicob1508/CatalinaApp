@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct Historico3: View {
+struct MainDiario: View {
     @StateObject private var globalState = GlobalState()
     
     var body: some View {
@@ -26,7 +26,7 @@ struct HistoricoEx2: View {
     var body: some View {
         ZStack{
             VStack{
-                HistoricoView22()
+                VistaDiario()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
@@ -34,13 +34,12 @@ struct HistoricoEx2: View {
                     .zIndex(1)
                     .edgesIgnoringSafeArea(.all)
             }
-            if globalState.filtroview{
-                Filtro()
+            if globalState.ToggleDiario{
+                MasInfoDiario()
                     .environmentObject(globalState)
                     .environment(\.managedObjectContext, self.moc)
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     .background(colorScheme == .light ? Color.white : Color.black)
-
                     .transition(AnyTransition.move(edge: .trailing).combined(with: .opacity))
                     .zIndex(1)
             }
@@ -56,7 +55,7 @@ struct HistoricoEx2: View {
 
 struct Historico3_Previews: PreviewProvider {
     static var previews: some View {
-        Historico3()
+        MainDiario()
     }
 }
 

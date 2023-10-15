@@ -79,8 +79,14 @@ class GlobalState: ObservableObject {
             UserDefaults.standard.set(fechaInfo, forKey: "fechaInfo")
         }
     }
-    @Published var dataArray: [ObjectBudget] = []
+    @Published var fechaInfoD: Int {
+        didSet {
+            UserDefaults.standard.set(fechaInfo, forKey: "fechaInfo")
+        }
+    }
+
     @Published var TuplaBudget: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    @Published var TuplaBudgetD: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
 
     
     init() {
@@ -96,9 +102,9 @@ class GlobalState: ObservableObject {
         self.esAdmin = Bool(UserDefaults.standard.bool(forKey: "esAdmin"))
         self.nombrePer = UserDefaults.standard.string(forKey: "nombrePer") ?? "NombreD"
         self.apellidoPer = UserDefaults.standard.string(forKey: "apellidoPer") ?? "ApellidoD"
-        self.dataArray = []
         self.TuplaBudget = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-
+        self.TuplaBudgetD = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        self.fechaInfoD = 0
     }
 }
 
@@ -129,7 +135,7 @@ struct VistaRoot: View {
                         .tag(Tabs.historico)
                         .id(UUID())
                     
-                    Historico3()
+                    MainDiario()
                         .environmentObject(globalState)
                         .tag(Tabs.historico1)
                         .id(UUID())

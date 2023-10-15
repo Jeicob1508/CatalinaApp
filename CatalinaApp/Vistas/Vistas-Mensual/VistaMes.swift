@@ -15,7 +15,6 @@ struct VistaMes: View {
     @StateObject var viewModel = ReadViewModel()
     @Environment(\.colorScheme) var colorScheme
     @EnvironmentObject var globalState: GlobalState
-    @Environment(\.managedObjectContext) private var moc
     
     static var fechaFormato = {
         let formato = DateFormatter()
@@ -54,6 +53,7 @@ struct VistaMes: View {
                                         Button(action:{
                                             let budgetmes = (Int(object.id) / 10000)
                                             let budgetanio = (Int(object.id) % 10000)
+                                            // La siguiente linea deberia quitarla, y usar el object.id para obtener la fecha
                                             globalState.fechaInfo = busquedaBudget(budgetAnio: budgetanio, budgetMes: budgetmes) ?? 0
                                             globalState.TuplaBudget = (object.id, object.tratamiento, object.varLeyPB,
                                                                        object.varLeyZN, object.PBProduccion, object.PBCalidad,
@@ -85,7 +85,6 @@ struct VistaMes: View {
             }
             .onAppear {
                 viewModel.observeListObjects()
-                print("Hola")
             }
         }
     }

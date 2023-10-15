@@ -39,4 +39,14 @@ class ReadViewModel: ObservableObject {
             })
         }
     }
+    func observeListObjectsD(){
+        ref.child("Daily").observe(.value){ parentSnapshot in
+            guard let children = parentSnapshot.children.allObjects as? [DataSnapshot] else {
+                return
+            }
+            self.listObject_Budget = children.compactMap({ snapshot in
+                return try? snapshot.data(as: ObjectBudget.self)
+            })
+        }
+    }
 }

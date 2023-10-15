@@ -30,11 +30,12 @@
 		0A3C08B62A7DCC5400E64B14 /* CatalinaAppUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */; };
 		0A3C08B82A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */; };
 		0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */; };
+		0A49B9A32ADC2A61006A7789 /* MasInfoDiario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A49B9A22ADC2A61006A7789 /* MasInfoDiario.swift */; };
 		0A90D4C22AD27AE70049A2AC /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A90D4C12AD27AE70049A2AC /* GoogleService-Info.plist */; };
 		0A90D4C42AD27B580049A2AC /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90D4C32AD27B580049A2AC /* FirebaseAnalytics */; };
 		0A90D4C62AD27B580049A2AC /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90D4C52AD27B580049A2AC /* FirebaseAnalyticsSwift */; };
-		0A90D4CA2AD2849B0049A2AC /* Historico3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90D4C92AD2849B0049A2AC /* Historico3.swift */; };
-		0A90D4CC2AD285060049A2AC /* HistoricoView22.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90D4CB2AD285060049A2AC /* HistoricoView22.swift */; };
+		0A90D4CA2AD2849B0049A2AC /* MainDiario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90D4C92AD2849B0049A2AC /* MainDiario.swift */; };
+		0A90D4CC2AD285060049A2AC /* VistaDiario.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A90D4CB2AD285060049A2AC /* VistaDiario.swift */; };
 		0A90D4D02AD5A4440049A2AC /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90D4CF2AD5A4440049A2AC /* FirebaseDatabase */; };
 		0A90D4D22AD5C91D0049A2AC /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0A90D4D12AD5C91D0049A2AC /* FirebaseDatabaseSwift */; };
 		0AA6494C2A80BA7E00557E11 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA6494B2A80BA7E00557E11 /* RootView.swift */; };
@@ -90,9 +91,10 @@
 		0A3C08B52A7DCC5400E64B14 /* CatalinaAppUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITests.swift; sourceTree = "<group>"; };
 		0A3C08B72A7DCC5400E64B14 /* CatalinaAppUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalinaAppUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0A3C08CA2A7DD30600E64B14 /* AgregarInformacion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgregarInformacion.swift; sourceTree = "<group>"; };
+		0A49B9A22ADC2A61006A7789 /* MasInfoDiario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasInfoDiario.swift; sourceTree = "<group>"; };
 		0A90D4C12AD27AE70049A2AC /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		0A90D4C92AD2849B0049A2AC /* Historico3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Historico3.swift; sourceTree = "<group>"; };
-		0A90D4CB2AD285060049A2AC /* HistoricoView22.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HistoricoView22.swift; sourceTree = "<group>"; };
+		0A90D4C92AD2849B0049A2AC /* MainDiario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainDiario.swift; sourceTree = "<group>"; };
+		0A90D4CB2AD285060049A2AC /* VistaDiario.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VistaDiario.swift; sourceTree = "<group>"; };
 		0AA6494B2A80BA7E00557E11 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		0AB179922AD5EF6500005D7E /* ObjectBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ObjectBudget.swift; sourceTree = "<group>"; };
 		0AB179962AD7C30300005D7E /* ReadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReadViewModel.swift; sourceTree = "<group>"; };
@@ -250,8 +252,9 @@
 		0A90D4CE2AD28CEE0049A2AC /* Vistas-Diario */ = {
 			isa = PBXGroup;
 			children = (
-				0A90D4C92AD2849B0049A2AC /* Historico3.swift */,
-				0A90D4CB2AD285060049A2AC /* HistoricoView22.swift */,
+				0A90D4C92AD2849B0049A2AC /* MainDiario.swift */,
+				0A90D4CB2AD285060049A2AC /* VistaDiario.swift */,
+				0A49B9A22ADC2A61006A7789 /* MasInfoDiario.swift */,
 				0A113C192A82EEA2001FD53E /* VerMasVista.swift */,
 			);
 			path = "Vistas-Diario";
@@ -426,8 +429,8 @@
 				0A113C142A82C151001FD53E /* ConfigNombre.swift in Sources */,
 				0A113C0B2A82B2DC001FD53E /* TabBarButton.swift in Sources */,
 				0A113C0E2A82B2FD001FD53E /* CustomTabBar.swift in Sources */,
-				0A90D4CA2AD2849B0049A2AC /* Historico3.swift in Sources */,
-				0A90D4CC2AD285060049A2AC /* HistoricoView22.swift in Sources */,
+				0A90D4CA2AD2849B0049A2AC /* MainDiario.swift in Sources */,
+				0A90D4CC2AD285060049A2AC /* VistaDiario.swift in Sources */,
 				0A3C08A22A7DCC5300E64B14 /* CatalinaApp.xcdatamodeld in Sources */,
 				0A113C1C2A849F0F001FD53E /* ConfigBudget.swift in Sources */,
 				0A113C332A857E9F001FD53E /* CatalinaDB+CoreDataClass.swift in Sources */,
@@ -435,6 +438,7 @@
 				0AB179972AD7C30300005D7E /* ReadViewModel.swift in Sources */,
 				0A113C312A857E9F001FD53E /* Budget+CoreDataClass.swift in Sources */,
 				0A3C08962A7DCC5100E64B14 /* CatalinaAppApp.swift in Sources */,
+				0A49B9A32ADC2A61006A7789 /* MasInfoDiario.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
