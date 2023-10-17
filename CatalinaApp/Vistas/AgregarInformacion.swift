@@ -11,6 +11,7 @@ import FirebaseDatabase
 import UIKit
 
 struct AgregarInformacion: View {
+    @State private var showAlert = false
     private let database = Database.database().reference()
     @EnvironmentObject var globalState: GlobalState
     @Binding var isShowingPopUp: Bool
@@ -57,8 +58,11 @@ struct AgregarInformacion: View {
     @State private var vartra: Double = 0.000
     @State private var editarIP: UUID = UUID()
     @State private var varfecha: Int64 = 0
+    @State private var varmantenimiento = false
+    @State private var mantenimiento: Int64 = 0
     
     @State private var registroExistente: CatalinaDB?
+    @State private var idMesActualizar: Int64 = 0
     
     @State private var fechaSeleccionada: Date = Date()
     
@@ -108,12 +112,25 @@ struct AgregarInformacion: View {
             "ZNFinos"       : self.zn_finos,
             
             "PBHead"        : self.head_pb,
-            "ZNHead"        : self.head_zn
+            "ZNHead"        : self.head_zn,
             
+            "Mantenimiento" : self.mantenimiento
         ]
         database.child("Daily").child("Daily-\(self.varfecha)").setValue(object)
     }
+    
+    private func editarValorEspecificoFB() {
+        let valorNuevo: Int = 1
 
+        database.child("Budget").child("Budget-\(idMesActualizar)").updateChildValues(["Mantenimiento": valorNuevo]) { (error, ref) in
+            if let error = error {
+                print("Error al editar el valor en Firebase: \(error.localizedDescription)")
+            } else {
+                print("Valor editado correctamente en Firebase")
+            }
+        }
+    }
+    
     var body: some View {
         ScrollView{
             VStack() {
@@ -123,16 +140,20 @@ struct AgregarInformacion: View {
                     Text("Tratamiento")
                         .font(.title)
                         .bold()
+                        .disabled(varmantenimiento)
+                        .opacity(varmantenimiento ? 0.5 : 1)
                     
                     creartxtField(texto1: "Valor:", texto2: "Tratamiento", variable: $txtfieldtra)
                     creartxtField(texto1: "Ley de Plomo: ", texto2: "Ley de Plomo", variable: $txtfieldley_pb)
-                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc:", variable: $txtfieldley_zn)
+                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc", variable: $txtfieldley_zn)
                 }
                 
                 VStack(spacing: 10) {
                     Text("Plomo")
                         .font(.title)
                         .bold()
+                        .disabled(varmantenimiento)
+                        .opacity(varmantenimiento ? 0.5 : 1)
                     creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldP)
                     creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldL)
                         .onChange(of: txtfieldL) { newValue in
@@ -145,6 +166,8 @@ struct AgregarInformacion: View {
                     Text("Zinc")
                         .font(.title)
                         .bold()
+                        .disabled(varmantenimiento)
+                        .opacity(varmantenimiento ? 0.5 : 1)
                     
                     creartxtField(texto1: "Producción:", texto2: "Ingresa un valor", variable: $txtfieldzP)
                     creartxtField(texto1: "Calidad:", texto2: "Ingresa un valor", variable: $txtfieldzL)
@@ -158,7 +181,8 @@ struct AgregarInformacion: View {
                     Spacer()
                     
                     Text("Fecha:")
-                        .font(.headline)
+                        .font(.title3)
+                        .frame(width: 140, alignment: .leading)
                     
                     Spacer()
                     
@@ -190,7 +214,32 @@ struct AgregarInformacion: View {
                             hasExistingData = buscarFechaExistente(day: selectedDay, month: selectedMonth, year: selectedYear)
                         }
                 }
-                
+                HStack{
+                    Spacer().frame(width: 15)
+                    Toggle(isOn: $varmantenimiento) {
+                        Text("¿Es día de mantenimiento?")
+                            .font(.title3)
+                            .frame(width: 140, alignment: .leading)
+                    }
+                    Spacer().frame(width: 40)
+                }
+                .onChange(of: varmantenimiento) { newValue in
+                    if newValue {
+                        txtfieldd = ""
+                        txtfielmm = ""
+                        txtfielaa = ""
+                        txtfieldL = ""
+                        txtfieldP = ""
+                        txtfieldR = ""
+                        txtfieldzL = ""
+                        txtfieldzP = ""
+                        txtfieldzR = ""
+                        txtfieldtra = ""
+                        txtfieldley_pb = ""
+                        txtfieldley_zn = ""
+                    }
+                }
+                Spacer().frame(height: 20)
                 if hasExistingData{
                     HStack{
                         Text("Ya se encuentra un registro en esa fecha, estas editando el registro ya existente.")
@@ -262,13 +311,26 @@ struct AgregarInformacion: View {
                             
                             calcular()
                             
-                            if hasExistingData{
-                                nuevaEntradaFB()
+                            if !varmantenimiento {
+                                if txtfieldP.isEmpty || txtfieldL.isEmpty || txtfieldR.isEmpty || txtfieldzP.isEmpty || txtfieldzL.isEmpty || txtfieldzR.isEmpty || txtfieldtra.isEmpty || txtfieldley_pb.isEmpty || txtfieldley_zn.isEmpty {
+                                    withAnimation {
+                                        self.showAlert = true
+                                    }
+                                } else{
+                                    if hasExistingData {
+                                        nuevaEntradaFB()
+                                    } else {
+                                        nuevaEntradaFB()
+                                    }
+                                    isShowingPopUp = false
+                                }
                             } else{
+                                idMesActualizar = varfecha % 1000000
+                                mantenimiento = 1
+                                editarValorEspecificoFB()
                                 nuevaEntradaFB()
+                                isShowingPopUp = false
                             }
-                            
-                            isShowingPopUp = false
                         }) {
                             HStack {
                                 Image(systemName: hasExistingData ? "pencil" : "plus")
@@ -287,7 +349,13 @@ struct AgregarInformacion: View {
                             .background(hasExistingData ? Color.yellow: Color.green)
                             .cornerRadius(10)
                         }
-                        
+                        .alert(isPresented: $showAlert) {
+                            Alert(
+                                title: Text("Error en los datos"),
+                                message: Text("No puedes dejar espacios en blanco"),
+                                dismissButton: .default(Text("Cerrar"))
+                            )
+                        }
                         Spacer()
                     }
                     Spacer()
@@ -302,10 +370,14 @@ struct AgregarInformacion: View {
             Text(texto1)
                 .font(.title3)
                 .frame(width: 140, alignment: .leading)
+                .disabled(varmantenimiento)
+                .opacity(varmantenimiento ? 0.5 : 1)
             Spacer()
             TextField(texto2, text: variable)
                 .textFieldStyle(RoundedBorderTextFieldStyle())
                 .keyboardType(.decimalPad)
+                .disabled(varmantenimiento)
+                .opacity(varmantenimiento ? 0.5 : 1)
             Spacer().frame(width: 15)
         }
     }

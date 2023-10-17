@@ -32,6 +32,8 @@ class ObjectBudget: Identifiable, Decodable, Hashable{
     var PBHead         : Double = 0.000
     var ZNHead         : Double = 0.000
     
+    var Mantenimiento  : Int = 0
+    
     static func == (lhs: ObjectBudget, rhs: ObjectBudget) -> Bool {
         return lhs.id == rhs.id
     }

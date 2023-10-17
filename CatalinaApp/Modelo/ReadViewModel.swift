@@ -15,6 +15,7 @@ class ReadViewModel: ObservableObject {
     
     @Published var objectBudget: ObjectBudget? = nil
     @Published var listObject_Budget = [ObjectBudget]()
+    @Published var listObject_BudgetD = [ObjectBudget]()
     
     func findObject(objectIdToFind: Int) {
         ref.queryOrdered(byChild: "id").queryEqual(toValue: objectIdToFind).observeSingleEvent(of: .value) { (snapshot, _) in
@@ -44,7 +45,7 @@ class ReadViewModel: ObservableObject {
             guard let children = parentSnapshot.children.allObjects as? [DataSnapshot] else {
                 return
             }
-            self.listObject_Budget = children.compactMap({ snapshot in
+            self.listObject_BudgetD = children.compactMap({ snapshot in
                 return try? snapshot.data(as: ObjectBudget.self)
             })
         }

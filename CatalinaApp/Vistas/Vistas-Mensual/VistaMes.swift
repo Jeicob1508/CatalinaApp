@@ -30,7 +30,7 @@ struct VistaMes: View {
     var body: some View {
         VStack{
             Spacer().frame(height: 15)
-            Text("Resumen Mensual")
+            Text("Reporte Mensual")
                 .font(.title)
                 .font(.system(size: 20))
             Spacer()
@@ -51,15 +51,12 @@ struct VistaMes: View {
                                     }
                                     HStack{
                                         Button(action:{
-                                            let budgetmes = (Int(object.id) / 10000)
-                                            let budgetanio = (Int(object.id) % 10000)
-                                            // La siguiente linea deberia quitarla, y usar el object.id para obtener la fecha
-                                            globalState.fechaInfo = busquedaBudget(budgetAnio: budgetanio, budgetMes: budgetmes) ?? 0
+                                            globalState.fechaInfo = busquedaBudget(id: object.id) 
                                             globalState.TuplaBudget = (object.id, object.tratamiento, object.varLeyPB,
                                                                        object.varLeyZN, object.PBProduccion, object.PBCalidad,
                                                                        object.PBRecuperacion, object.ZNProduccion, object.ZNCalidad,
                                                                        object.ZNRecuperacion, object.PBFinos, object.ZNFinos,
-                                                                       object.PBHead, object.ZNHead)
+                                                                       object.PBHead, object.ZNHead, object.Mantenimiento)
                                             print("TuplaBudget copiado: \(globalState.TuplaBudget)")
                                             globalState.ToggleMes.toggle()
                                         }){
@@ -89,14 +86,13 @@ struct VistaMes: View {
         }
     }
     
-    func busquedaBudget(budgetAnio: Int, budgetMes: Int) -> Int? {
-        let budgetAnioString = String(format: "%04d", budgetAnio)
-        let budgetMesString = String(format: "%02d", budgetMes)
-        let concatenatedString =  budgetMesString + budgetAnioString
-        
-        print("La fecha es: \(concatenatedString)")
-        
-        return Int(concatenatedString)
+    func busquedaBudget(id: Int) -> Int {
+        let idString = String(id)
+        if idString.count == 7 {
+            return Int("0" + idString)!
+        } else {
+            return id
+        }
     }
     
     func obtenerNombreMes(numeroMes: Int64) -> String? {
@@ -119,10 +115,8 @@ struct VistaMes: View {
     }
     
     func obteneranio(fecha: Int64) -> String {
-        let numeroano = String(fecha % 10000)
-        return numeroano
+        return String(fecha % 10000)
     }
-    
 }
 
 struct LoadingView: View {

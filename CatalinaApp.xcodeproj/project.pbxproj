@@ -13,7 +13,6 @@
 		0A113C142A82C151001FD53E /* ConfigNombre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C132A82C151001FD53E /* ConfigNombre.swift */; };
 		0A113C162A82DCB3001FD53E /* MainMes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C152A82DCB3001FD53E /* MainMes.swift */; };
 		0A113C182A82DEC8001FD53E /* Filtro.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C172A82DEC8001FD53E /* Filtro.swift */; };
-		0A113C1A2A82EEA2001FD53E /* VerMasVista.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C192A82EEA2001FD53E /* VerMasVista.swift */; };
 		0A113C1C2A849F0F001FD53E /* ConfigBudget.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C1B2A849F0F001FD53E /* ConfigBudget.swift */; };
 		0A113C312A857E9F001FD53E /* Budget+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C2D2A857E9F001FD53E /* Budget+CoreDataClass.swift */; };
 		0A113C322A857E9F001FD53E /* Budget+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A113C2E2A857E9F001FD53E /* Budget+CoreDataProperties.swift */; };
@@ -71,7 +70,6 @@
 		0A113C132A82C151001FD53E /* ConfigNombre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigNombre.swift; sourceTree = "<group>"; };
 		0A113C152A82DCB3001FD53E /* MainMes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainMes.swift; sourceTree = "<group>"; };
 		0A113C172A82DEC8001FD53E /* Filtro.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filtro.swift; sourceTree = "<group>"; };
-		0A113C192A82EEA2001FD53E /* VerMasVista.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerMasVista.swift; sourceTree = "<group>"; };
 		0A113C1B2A849F0F001FD53E /* ConfigBudget.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfigBudget.swift; sourceTree = "<group>"; };
 		0A113C2D2A857E9F001FD53E /* Budget+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		0A113C2E2A857E9F001FD53E /* Budget+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Budget+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -255,7 +253,6 @@
 				0A90D4C92AD2849B0049A2AC /* MainDiario.swift */,
 				0A90D4CB2AD285060049A2AC /* VistaDiario.swift */,
 				0A49B9A22ADC2A61006A7789 /* MasInfoDiario.swift */,
-				0A113C192A82EEA2001FD53E /* VerMasVista.swift */,
 			);
 			path = "Vistas-Diario";
 			sourceTree = "<group>";
@@ -263,8 +260,8 @@
 		0AB179912AD5EF4600005D7E /* Modelo */ = {
 			isa = PBXGroup;
 			children = (
-				0AB179922AD5EF6500005D7E /* ObjectBudget.swift */,
 				0AB179962AD7C30300005D7E /* ReadViewModel.swift */,
+				0AB179922AD5EF6500005D7E /* ObjectBudget.swift */,
 				0AB179982AD82F9B00005D7E /* ObjectDemo.swift */,
 			);
 			path = Modelo;
@@ -425,7 +422,6 @@
 				0A113C102A82B5B6001FD53E /* ConfiguracionView.swift in Sources */,
 				0A3C08982A7DCC5100E64B14 /* VistaMes.swift in Sources */,
 				0A3C08CB2A7DD30600E64B14 /* AgregarInformacion.swift in Sources */,
-				0A113C1A2A82EEA2001FD53E /* VerMasVista.swift in Sources */,
 				0A113C142A82C151001FD53E /* ConfigNombre.swift in Sources */,
 				0A113C0B2A82B2DC001FD53E /* TabBarButton.swift in Sources */,
 				0A113C0E2A82B2FD001FD53E /* CustomTabBar.swift in Sources */,

@@ -107,6 +107,11 @@ struct ConfiguracionView: View {
                 BotonIcono(color: Color.pastelGreen, imageName: "questionmark", title: "Manual") {
                     // Acción para "Manual"
                 }
+                
+                BotonIcono(color: Color.pastelGreen, imageName: "questionmark", title: "Cantidad de Registros") {
+                    
+                }
+                
             }
             
             Section(header: Text("Opciones Generales")) {

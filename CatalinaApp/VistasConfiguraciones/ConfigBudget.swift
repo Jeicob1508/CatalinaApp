@@ -48,6 +48,7 @@ struct ConfigBudget: View {
     @State private var varfecha: Int64 = 0
     @State private var mesfecha: Int64 = 0
     @State private var aniofecha: Int64 = 0
+    @State private var vartrata: Int64 = 0
     
     @State private var recordExists = false
     @State private var editarIP: UUID = UUID()
@@ -100,7 +101,9 @@ struct ConfigBudget: View {
             "ZNFinos"       : self.zn_finos,
             
             "PBHead"        : self.head_pb,
-            "ZNHead"        : self.head_zn
+            "ZNHead"        : self.head_zn,
+            
+            "Mantenimiento" : self.vartrata
             
         ]
         database.child("Budget").child("Budget-\(self.varfecha)").setValue(object)
@@ -118,7 +121,7 @@ struct ConfigBudget: View {
                     
                     creartxtField(texto1: "Valor:", texto2: "Tratamiento", variable: $txtfieldtra)
                     creartxtField(texto1: "Ley de Plomo: ", texto2: "Ley de Plomo", variable: $txtfieldley_pb)
-                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc:", variable: $txtfieldley_zn)
+                    creartxtField(texto1: "Ley de Zinc:", texto2: "Ley de Zinc", variable: $txtfieldley_zn)
                 }
                 VStack(spacing: 10) {
                     Text("Plomo")
@@ -157,11 +160,21 @@ struct ConfigBudget: View {
                         let selectedMonth = newValue
                         let selectedYear = Int(txtfieldanio) ?? 0
                         recordExists = recordExistsForMonthAndYear(month: selectedMonth, year: selectedYear)
+                        if selectedMonth == 2 {
+                            vartrata = 1
+                        } else {
+                            vartrata = 0
+                        }
                     }
                     .onAppear {
                         let selectedMonth = fechaMes
                         let selectedYear = Int(txtfieldanio) ?? 0
                         recordExists = recordExistsForMonthAndYear(month: selectedMonth, year: selectedYear)
+                        if selectedMonth == 2 {
+                            vartrata = 1
+                        } else {
+                            vartrata = 0 // Establece vartrata en 0 para otros meses
+                        }
                     }
                     .pickerStyle(DefaultPickerStyle())
                     
@@ -172,8 +185,6 @@ struct ConfigBudget: View {
                     
                     Spacer()
                 }
-
-                
                 VStack{
                     if recordExists{
                         HStack{
@@ -289,6 +300,7 @@ struct ConfigBudget: View {
                 .keyboardType(.decimalPad)
             Spacer().frame(width: 15)
         }
+        
     }
     
     func calcular(){

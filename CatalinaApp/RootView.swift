@@ -15,6 +15,11 @@ class GlobalState: ObservableObject {
             UserDefaults.standard.set(BudgetMes, forKey: "BudgetMes")
         }
     }
+    @Published var CantRegistros:Int64 {
+        didSet {
+            UserDefaults.standard.set(CantRegistros, forKey: "CantRegistros")
+        }
+    }
     @Published var tipoFecha:Bool {
         didSet {
             UserDefaults.standard.set(tipoFecha, forKey: "tipoFecha")
@@ -85,11 +90,12 @@ class GlobalState: ObservableObject {
         }
     }
 
-    @Published var TuplaBudget: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-    @Published var TuplaBudgetD: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+    @Published var TuplaBudget: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Int) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0)
+    @Published var TuplaBudgetD: (Int, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Double, Int) = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0)
 
     
     init() {
+        self.CantRegistros = 15
         self.tipoFecha = Bool(UserDefaults.standard.bool(forKey: "tipoFecha"))
         self.modoOscuro = false
         self.filtroview = false
@@ -102,8 +108,8 @@ class GlobalState: ObservableObject {
         self.esAdmin = Bool(UserDefaults.standard.bool(forKey: "esAdmin"))
         self.nombrePer = UserDefaults.standard.string(forKey: "nombrePer") ?? "NombreD"
         self.apellidoPer = UserDefaults.standard.string(forKey: "apellidoPer") ?? "ApellidoD"
-        self.TuplaBudget = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
-        self.TuplaBudgetD = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0)
+        self.TuplaBudget = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0)
+        self.TuplaBudgetD = (0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0)
         self.fechaInfoD = 0
     }
 }
